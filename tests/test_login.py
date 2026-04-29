@@ -39,3 +39,15 @@ def test_empty_password(page):
 
     expect(page.get_by_text("Please enter your password")).to_be_visible()
     assert "login" in page.url.lower()
+
+def test_forgot_password_link(page):
+    page.goto(f"{BASE_URL}/login")
+
+    page.get_by_role("textbox").first.fill(HUDL_EMAIL)
+    page.get_by_role("button", name="Continue", exact=True).click()
+
+    page.get_by_role("link", name="Forgot password?").click()
+    page.get_by_role("button", name="Continue", exact=True).click()
+
+    assert "reset-password" in page.url.lower()
+
