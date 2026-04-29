@@ -19,7 +19,3 @@ class LoginPage:
 
     def click_continue(self):
         self.page.get_by_role("button", name="Continue", exact=True).click()
-
-    
-
-    
