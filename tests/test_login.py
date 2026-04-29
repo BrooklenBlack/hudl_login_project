@@ -5,6 +5,7 @@ from playwright.sync_api import expect
 def test_login_page_loads(page):
     login_page = LoginPage(page)
     login_page.load_login()
+
     assert "Log In" in page.title()
 
 def test_login_with_valid_credentials(page):
@@ -13,6 +14,7 @@ def test_login_with_valid_credentials(page):
 
     login_page.enter_email(HUDL_EMAIL)
     login_page.click_continue()
+    
     login_page.enter_password(HUDL_PASSWORD)
     login_page.click_continue()
 
