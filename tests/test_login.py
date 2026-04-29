@@ -15,3 +15,15 @@ def test_login_with_valid_credentials(page):
     page.get_by_role("button", name="Continue", exact=True).click()
 
     assert "login" not in page.url.lower()
+
+def test_login_with_invalid_credentials(page):
+    page.goto(f"{BASE_URL}/login")
+
+    page.get_by_role("textbox").first.fill("invalid@example.com")
+    page.get_by_role("button", name="Continue", exact=True).click()
+
+    page.locator("input[type='password']").fill("invalidpassword")
+    page.get_by_role("button", name="Continue", exact=True).click()
+
+    expect(page.get_by_text("email or password is incorrect")).to_be_visible()
+    assert "login" in page.url.lower()
